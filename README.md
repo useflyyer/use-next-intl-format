@@ -17,7 +17,7 @@ yarn add use-next-intl-format
 ## Supported Intl helpers
 
 * [`DateTimeFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat) — via `useIntlDateTimeFormat`
-* [`RelativeTimeFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat) — via `useIntlRelativeTimeFormatOptions`
+* [`RelativeTimeFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat) — via `useIntlRelativeTimeFormat`
 * [`NumberFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) — via `useIntlNumberFormat`
 * [`PluralRules`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) — via `useIntlPluralRules`
 
