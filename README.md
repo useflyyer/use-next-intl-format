@@ -1,6 +1,6 @@
 # use-next-intl-format
 
-> React Hook for creating memoized native instances of Intl for Next.js i18n
+Super lightweight ([342B minified + gzipped](https://bundlephobia.com/result?p=use-next-intl-format))and zero-dependencies React Hook for creating memoized native instances of Intl for Next.js i18n
 
 [![NPM](https://img.shields.io/npm/v/use-next-intl-format.svg)](https://www.npmjs.com/package/use-next-intl-format) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
