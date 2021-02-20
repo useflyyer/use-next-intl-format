@@ -10,7 +10,7 @@
   "types": "dist/index.d.ts",
   "jsnext:main": "dist/index.es.js",
   "engines": {
-    "node": ">=8",
+    "node": ">=12",
     "npm": ">=5"
   },
   "scripts": {
