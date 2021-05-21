@@ -1,4 +1,5 @@
-import { DependencyList, useMemo } from "react";
+import { useMemo, useRef } from "react";
+import { dequal } from 'dequal/lite';
 
 import { useRouter } from "next/router";
 
@@ -10,8 +11,17 @@ function useMemoObject<T, O = Record<string,any>>(factory: () => T, obj?: O, dep
   if (obj) {
     const depsObj = Object.values(obj);
     dependencies = [depsObj.length].concat(depsObj, deps as any); // concat flattens arrays
+}
+
+/**
+ * Internal hook to help object compare.
+ */
+function usePrevious<T>(value?: T) {
+  const prev = useRef<T>();
+  if (!prev.current || !dequal(prev.current, value)) {
+    prev.current = value;
   }
-  return useMemo(factory, dependencies);
+  return prev.current
 }
 
 /**
@@ -21,7 +31,8 @@ function useMemoObject<T, O = Record<string,any>>(factory: () => T, obj?: O, dep
 export function useIntlDateTimeFormat(options?: Intl.DateTimeFormatOptions): Intl.DateTimeFormat {
   const router = useRouter();
   const locale = router.locale || "default";
-  return useMemoObject(() => new Intl.DateTimeFormat(locale, options), options, [locale]);
+  const opts = usePrevious(options);
+  return useMemo(() => new Intl.DateTimeFormat(locale, options), [opts, locale]);
 }
 
 /**
@@ -31,7 +42,8 @@ export function useIntlDateTimeFormat(options?: Intl.DateTimeFormatOptions): Int
 export function useIntlNumberFormat(options?: Intl.NumberFormatOptions): Intl.NumberFormat {
   const router = useRouter();
   const locale = router.locale || "default";
-  return useMemoObject(() => new Intl.NumberFormat(locale, options), options, [locale]);
+  const opts = usePrevious(options);
+  return useMemo(() => new Intl.NumberFormat(locale, options), [opts, locale]);
 }
 
 /**
@@ -41,7 +53,8 @@ export function useIntlNumberFormat(options?: Intl.NumberFormatOptions): Intl.Nu
 export function useIntlRelativeTimeFormat(options?: Intl.RelativeTimeFormatOptions): Intl.RelativeTimeFormat {
   const router = useRouter();
   const locale = router.locale || "default";
-  return useMemoObject(() => new Intl.RelativeTimeFormat(locale, options), options, [locale]);
+  const opts = usePrevious(options);
+  return useMemo(() => new Intl.RelativeTimeFormat(locale, options), [opts, locale]);
 }
 
 /**
@@ -51,5 +64,6 @@ export function useIntlRelativeTimeFormat(options?: Intl.RelativeTimeFormatOptio
 export function useIntlPluralRules(options?: Intl.PluralRulesOptions): Intl.PluralRules {
   const router = useRouter();
   const locale = router.locale || "default";
-  return useMemoObject(() => new Intl.PluralRules(locale, options), options, [locale]);
+  const opts = usePrevious(options);
+  return useMemo(() => new Intl.PluralRules(locale, options), [opts, locale]);
 }
