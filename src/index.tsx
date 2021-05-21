@@ -4,13 +4,15 @@ import { dequal } from 'dequal/lite';
 import { useRouter } from "next/router";
 
 /**
- * Internal function, can be optimized and improved but works for most of cases related to Intl.
+ * Safe date parse.
  */
-function useMemoObject<T, O = Record<string,any>>(factory: () => T, obj?: O, deps?: DependencyList): T {
-  let dependencies: DependencyList = deps || [];
-  if (obj) {
-    const depsObj = Object.values(obj);
-    dependencies = [depsObj.length].concat(depsObj, deps as any); // concat flattens arrays
+export function useDate(value?: number | string | Date | null): Date | null {
+  return useMemo(() => {
+    // @ts-expect-error Type error
+    const date =  new Date(value);
+    // @ts-expect-error Type error
+    return date instanceof Date && !isNaN(date) ? date : null
+  }, ["" + value]);
 }
 
 /**
