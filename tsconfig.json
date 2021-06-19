@@ -9,11 +9,11 @@
       "es2017",
       "es2018",
       "es2019",
-      "es2020",
+      "es2020"
     ],
     "sourceMap": true,
     "allowJs": false,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "moduleResolution": "node",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -29,7 +29,8 @@
     "strict": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src"

@@ -22,6 +22,7 @@ export default {
       sourcemap: true
     }
   ],
+  external: ["dequal", "dequal/lite", "react", "next", "next/head"],
   plugins: [
     external(),
     url({ exclude: ['**/*.svg'] }),
