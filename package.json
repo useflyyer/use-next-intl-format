@@ -1,6 +1,6 @@
 {
   "name": "use-next-intl-format",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "React Hook for creating memoized native instances of Intl for Next.js i18n",
   "author": "lopezjurip",
   "license": "MIT",
