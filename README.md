@@ -36,6 +36,9 @@ yarn add use-next-intl-format
 * [`RelativeTimeFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat) — via `useIntlRelativeTimeFormat`
 * [`NumberFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat) — via `useIntlNumberFormat`
 * [`PluralRules`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules) — via `useIntlPluralRules`
+* [`DisplayNames`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames) — via `useIntlDisplayNames`
+* [`ListFormat`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/ListFormat) — via `useIntlListFormat`
+* [`Segmenter`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Segmenter/Segmenter) — via `useIntlSegmenter`
 
 ## Usage
 
@@ -50,13 +53,18 @@ import * as React from 'react'
 
 import { useIntlDateTimeFormat, useIntlNumberFormat } from 'use-next-intl-format'
 
+// Prefer stable values.
+const DATE_OPTIONS: Intl.DateTimeFormatOptions = {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+};
+
 const Example = () => {
-  const dateFormatter = useIntlDateTimeFormat({
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  })
-  const numberFormatter = useIntlNumberFormat({ notation: "compact" })
+  const dateFormatter = useIntlDateTimeFormat(DATE_OPTIONS);
+
+  const [numberFormatterOptions] = useState({ notation: "compact" });
+  const numberFormatter = useIntlNumberFormat(numberFormatterOptions)
 
   return (
     <div>

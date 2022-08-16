@@ -1,5 +1,4 @@
-import { useMemo, useRef } from "react";
-import { dequal } from 'dequal/lite';
+import { useMemo } from "react";
 
 import { useRouter } from "next/router";
 
@@ -15,15 +14,9 @@ export function useDate(value?: number | string | Date | null): Date | null {
   }, ["" + value]);
 }
 
-/**
- * Internal hook to help object compare.
- */
-function usePrevious<T>(value?: T) {
-  const prev = useRef<T>();
-  if (!prev.current || !dequal(prev.current, value)) {
-    prev.current = value;
-  }
-  return prev.current
+function useNextJSLocale() {
+  const router = useRouter();
+  return router.locale || "default";
 }
 
 /**
@@ -31,10 +24,8 @@ function usePrevious<T>(value?: T) {
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
  */
 export function useIntlDateTimeFormat(options?: Intl.DateTimeFormatOptions): Intl.DateTimeFormat {
-  const router = useRouter();
-  const locale = router.locale || "default";
-  const opts = usePrevious(options);
-  return useMemo(() => new Intl.DateTimeFormat(locale, options), [opts, locale]);
+  const locale = useNextJSLocale();
+  return useMemo(() => new Intl.DateTimeFormat(locale, options), [options, locale]);
 }
 
 /**
@@ -42,10 +33,8 @@ export function useIntlDateTimeFormat(options?: Intl.DateTimeFormatOptions): Int
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
  */
 export function useIntlNumberFormat(options?: Intl.NumberFormatOptions): Intl.NumberFormat {
-  const router = useRouter();
-  const locale = router.locale || "default";
-  const opts = usePrevious(options);
-  return useMemo(() => new Intl.NumberFormat(locale, options), [opts, locale]);
+  const locale = useNextJSLocale();
+  return useMemo(() => new Intl.NumberFormat(locale, options), [options, locale]);
 }
 
 /**
@@ -53,10 +42,8 @@ export function useIntlNumberFormat(options?: Intl.NumberFormatOptions): Intl.Nu
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/RelativeTimeFormat
  */
 export function useIntlRelativeTimeFormat(options?: Intl.RelativeTimeFormatOptions): Intl.RelativeTimeFormat {
-  const router = useRouter();
-  const locale = router.locale || "default";
-  const opts = usePrevious(options);
-  return useMemo(() => new Intl.RelativeTimeFormat(locale, options), [opts, locale]);
+  const locale = useNextJSLocale();
+  return useMemo(() => new Intl.RelativeTimeFormat(locale, options), [options, locale]);
 }
 
 /**
@@ -64,8 +51,33 @@ export function useIntlRelativeTimeFormat(options?: Intl.RelativeTimeFormatOptio
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/PluralRules
  */
 export function useIntlPluralRules(options?: Intl.PluralRulesOptions): Intl.PluralRules {
-  const router = useRouter();
-  const locale = router.locale || "default";
-  const opts = usePrevious(options);
-  return useMemo(() => new Intl.PluralRules(locale, options), [opts, locale]);
+  const locale = useNextJSLocale();
+  return useMemo(() => new Intl.PluralRules(locale, options), [options, locale]);
+}
+
+/**
+ * Create memoized Intl.PluralRules instance based on current locale
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames
+ */
+export function useIntlDisplayNames(options: Intl.DisplayNamesOptions): Intl.DisplayNames {
+  const locale = useNextJSLocale();
+  return useMemo(() => new Intl.DisplayNames(locale, options), [options, locale]);
+}
+
+/**
+ * Create memoized Intl.PluralRules instance based on current locale
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/ListFormat/ListFormat
+ */
+export function useIntlListFormat(options?: Intl.ListFormatOptions): Intl.ListFormat {
+  const locale = useNextJSLocale();
+  return useMemo(() => new Intl.ListFormat(locale, options), [options, locale]);
+}
+
+/**
+ * Create memoized Intl.PluralRules instance based on current locale
+ * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Segmenter/Segmenter
+ */
+export function useIntlSegmenter(options?: Intl.SegmenterOptions): Intl.Segmenter {
+  const locale = useNextJSLocale();
+  return useMemo(() => new Intl.Segmenter(locale, options), [options, locale]);
 }
