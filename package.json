@@ -4,7 +4,7 @@
   "description": "React Hook for creating memoized native instances of Intl for Next.js i18n",
   "author": "lopezjurip",
   "license": "MIT",
-  "repository": "flayyer/use-next-intl-format",
+  "repository": "useflyyer/use-next-intl-format",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
