@@ -2,7 +2,7 @@ import { useContext, useMemo, createContext } from "react";
 
 import { useRouter } from "next/router";
 
-const IntlDefaultLocaleContext = /*#__PURE__*/ createContext<string>("default");
+export const IntlDefaultLocaleContext = /*#__PURE__*/ createContext<string>("default");
 
 /**
  * Safe date parse.
