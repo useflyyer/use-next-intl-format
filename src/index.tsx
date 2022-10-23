@@ -1,6 +1,8 @@
-import { useMemo } from "react";
+import { useContext, useMemo, createContext } from "react";
 
 import { useRouter } from "next/router";
+
+const IntlDefaultLocaleContext = /*#__PURE__*/ createContext<string>("default");
 
 /**
  * Safe date parse.
@@ -16,7 +18,8 @@ export function useDate(value?: number | string | Date | null): Date | null {
 
 function useNextJSLocale() {
   const router = useRouter();
-  return router.locale || "default";
+  const defaultLocale = useContext(IntlDefaultLocaleContext);
+  return router.locale || router.defaultLocale || defaultLocale;
 }
 
 /**
